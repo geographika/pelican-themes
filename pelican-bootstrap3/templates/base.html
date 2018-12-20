@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 {% if USE_OPEN_GRAPH is not defined %}
     {% set USE_OPEN_GRAPH = True %}
 {% endif %}
@@ -99,6 +99,43 @@
               title="{{ SITENAME }} {{ category }} ATOM Feed"/>
     {% endif %}
 
+    <link rel="stylesheet" href="/js/fullcalendar-3.5.0/fullcalendar.css" />
+    <link rel="stylesheet" href="/js/fullcalendar-3.5.0/fullcalendar.print.css" media='print' />
+    <script src='/js/fullcalendar-3.5.0/lib/moment.min.js'></script>
+    <!--<script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/jquery.min.js"></script>-->
+    <script src='/js/fullcalendar-3.5.0/lib/jquery.min.js'></script>
+    <script src='/js/fullcalendar-3.5.0/fullcalendar.js'></script>
+    <script src='/js/fullcalendar-3.5.0/gcal.js'></script>
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css" />
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.js'></script>
+
+    <script src='/js/lightbox-5.3.0/ekko-lightbox.min.js'></script>
+    <link rel="stylesheet" href="/js/lightbox-5.3.0/ekko-lightbox.css" />
+
+    {% if article %}
+    {% if article.stylesheets %}
+    {% for stylesheet in article.stylesheets %}
+    {{ stylesheet }}
+    {% endfor %}
+    {% endif %}
+    {% endif %}
+    
+    {% if page %}
+    {% if page.stylesheets %}
+    {% for stylesheet in page.stylesheets %}
+    {{ stylesheet }}
+    {% endfor %}
+    {% endif %}
+    {% endif %}    
+
+    {% if page %}
+        {% if page.styles %}
+            {% for page in page.styles %}
+    {{ style }}
+            {% endfor %}
+        {% endif %} 
+    {% endif %}
 </head>
 <body>
 
@@ -189,7 +226,11 @@
 </div>
 {% include 'includes/footer.html' %}
 
+<!--<script src='/js/fullcalendar-3.0.0/lib/moment.min.js'></script>
 <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/jquery.min.js"></script>
+<script src='/js/fullcalendar-3.0.0/fullcalendar.js'></script>
+<script src='/js/fullcalendar-3.0.0/gcal.js'></script>-->
+
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/bootstrap.min.js"></script>
@@ -206,5 +247,29 @@
 {% include 'includes/piwik.html' %}
 
 {% block scripts %}{% endblock %}
+
+{% if page %}
+    {% if page.scripts %}
+        {% for script in page.scripts %}
+{{ script }}
+        {% endfor %}
+    {% endif %}
+{% endif %}
+
+    {% if article %}
+    {% if article.javascripts %}
+    {% for javascript in article.javascripts %}
+    {{ javascript }}
+    {% endfor %}
+    {% endif %}
+    {% endif %}
+
+    {% if page %}
+    {% if page.javascripts %}
+    {% for javascript in page.javascripts %}
+    {{ javascript }}
+    {% endfor %}
+    {% endif %}
+    {% endif %}
 </body>
 </html>
